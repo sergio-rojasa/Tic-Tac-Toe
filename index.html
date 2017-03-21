@@ -6,7 +6,23 @@
   <link rel="stylesheet" href="app/app.css">
 </head>
 <body>
-  <canvas id="myCanvas" width="480" height="320"></canvas>
+  <div id="boardGame">
+    <div id="row-0">
+      <div class="pad" id='col-0' onclick="game.update(0, 0)">1</div>
+      <div class="pad" id='col-1' onclick="game.update(0, 1)">2</div>
+      <div class="pad" id='col-2' onclick="game.update(0, 2)">3</div>
+    </div>
+    <div id="row-1">
+      <div class="pad" id='col-0' onclick="game.update(1, 0)">4</div>
+      <div class="pad" id='col-1' onclick="game.update(1, 1)">5</div>
+      <div class="pad" id='col-2' onclick="game.update(1, 2)">6</div>
+    </div>
+    <div id="row-2">
+      <div class="pad" id="col-0" onclick="game.update(2, 0)">7</div>
+      <div class="pad" id='col-1' onclick="game.update(2, 1)">8</div>
+      <div class="pad" id='col-2' onclick="game.update(2, 2)">9</div>
+    </div>
+  </div>
   <script src="app/square.js"></script>
   <script src="app/app.js"></script>
 </body>

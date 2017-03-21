@@ -1,8 +1,6 @@
 var expect = require('chai').expect;
 var Square = require('../app/square');
 
-
-
 describe('Square', function() {
   var square = new Square(25);
 
@@ -24,6 +22,9 @@ describe('Square', function() {
     });
     it('should have a render method', function() {
       expect(square).to.have.property('render').be.a('function');
+    });
+    it('should have a bindEvent method', function() {
+      expect(square).to.have.property('bindEvent').be.a('function');
     })
   });
 })
