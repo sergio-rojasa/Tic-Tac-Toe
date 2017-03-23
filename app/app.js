@@ -2,12 +2,12 @@
 var Game = (function() {
   function Game() {
     this.players = {
-      player1: 'x',
-      player2: 'o'
+      human: null,
+      computer: null
     },
     this.stillPlaying = true,
-    this.currentTurn = 1,
-    this.currentPlayer = this.players.player1,
+    this.currentTurn = 0,
+    this.currentPlayer = null,
     this.boardGame = [
       [0, 0, 0],
       [0, 0, 0],
@@ -16,20 +16,22 @@ var Game = (function() {
   }
 
   Game.prototype.init = function() {
-    this.render();
+    this.choosePiece();
+    this.checkFirstTurn();
     this.play();
   },
   Game.prototype.play = function() {
     while(this.stillPlaying) {
-      this.switchTurn();
-      this.currentTurn++;
-
-      if(this.currentTurn == 6) {
-        console.log(this);
-        this.stillPlaying = false;
-        this.reset();
-        console.log('bye');
-      }
+      console.log(this);
+      this.stillPlaying = false;
+    }
+  },
+  Game.prototype.checkFirstTurn = function() {
+    if(this.players.human === 'x') {
+      this.currentPlayer = 'human';
+    }
+    else if (this.players.human === 'o'){
+      this.currentPlayer = 'computer';
     }
   },
   Game.prototype.switchTurn = function() {
@@ -48,11 +50,37 @@ var Game = (function() {
     }
     console.log(this.boardGame);
   },
-  Game.prototype.choose = function() {
+  Game.prototype.choosePiece = function() {
+   var humanPiece = prompt('Choose x or o').toLowerCase();
+
+    while(this.checkHumanPiece(humanPiece)) {
+      humanPiece = prompt('Choose x or o').toLowerCase();
+    }
+
+    this.players.human = humanPiece;
+    this.setComputerPiece(humanPiece);
+  },
+  Game.prototype.checkHumanPiece = function(humanPiece) {
+    if(humanPiece === 'x' || humanPiece === 'o') {
+      return false;
+    }
+    else {
+      return true;
+    }
+  },
+  Game.prototype.setComputerPiece = function(humanPiece) {
+    if(humanPiece === 'x') {
+      this.players.computer = 'o';
+    }
+    else if (humanPiece === 'o'){
+      this.players.computer = 'x';
+    }
+  },
+  Game.prototype.computerMove = function() {
 
   },
   Game.prototype.update = function(a, b) {
-    this.boardGame[a][b] = this.players.player1;
+    this.boardGame[a][b] = this.players.human;
     this.render();
   },
   Game.prototype.render = function() {
@@ -65,3 +93,5 @@ var Game = (function() {
 
 var game = new Game();
 game.init();
+
+module.exports = Game;
